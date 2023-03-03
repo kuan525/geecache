@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package geecachepb;
+
+// https://protobuf.dev/reference/go/go-generated/#package
+// 为了生成Go代码，必须为每个.proto文件提供Go包的导入路径(文件中或者命令行写)
+option go_package = "./";
+
+//包含两个字段，与之前定义的'/_geecache/<group>/<key>'所需的参数吻合
+message Request {
+  string group = 1;
+  string key = 2;
+}
+
+// 包含一个字段，与之前吻合
+message Response {
+  bytes value = 1;
+}
+
+service GroupCache {
+  rpc Get(Request) returns (Response);
+}
